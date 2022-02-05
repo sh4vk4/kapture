@@ -299,7 +299,7 @@ img{
 .hero__particle6{
     position: absolute;
     right: 28rem;
-    top: 88rem;
+    top: 92rem;
     z-index: 2;
     animation: 4s linear infinite rotate, 4s fadeIn; 
 }
@@ -667,7 +667,7 @@ button:hover{
 .featured__item{
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .featured__item img{

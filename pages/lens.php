@@ -29,7 +29,7 @@
           >kapture<span style="color: red">.</span></a
         >
         <ul>
-          <li><a href="products.html">товары</a></li>
+          <li><a href="products.php">товары</a></li>
           <li><a href="about.html">о нас</a></li>
           <li><a href="contact.html">контакты</a></li>
         </ul>
@@ -41,11 +41,11 @@
       <div class="hero__particle3"></div>
       <div class="hero__container container">
         <h1>
-          <span style="color:rgb(81, 81, 81);">контакты.</span><br />
-          <span style="color:rgb(31, 31, 31);">контакты.</span><br />
-          контакты.
+          камеры.<br />
+          объективы.<br />
+          аксессуары.
         </h1>
-        <h2>свяжитесь с нами</h2>
+        <h2>каталог товаров</h2>
       </div>
       <div class="hero__grid">
         <div class="hero__grid-pic1">
@@ -59,47 +59,48 @@
         </div>
       </div>
     </section>
-    <section class="contact">
-        <div class="hero__particle4"></div>
+    <section id="product__item" class="product">
+      <div class="hero__particle4"></div>
       <div class="hero__particle5"></div>
-        <div class="contact__container container">
-            <div class="contact__text">
-                <div class="contact__text-txt">
-                    <h4>наша почта</h4>
-                    <p class="email">kapture@photo.com</p>
-                </div>
-                <div class="contact__text-txt">
-            <h4>наш офис</h4>
-            <p>Сан-Франциско,<br>
-            Калифорния</p>
-            </div>
-            <div class="contact__text-txt">
-                <i class='bx bxl-twitter'></i> <i class='bx bxl-facebook'></i> <i class='bx bxl-instagram-alt'></i>
-            </div>
+      <div class="product__container container">
+          <h3 style="text-align: left;">объективы ↓</h3>
+          <div class="product__catalogue">
+            <ul>
+                <li><a href="cameras.php#product__item">камеры</a></li> |
+                <li><u>объективы</u></li> |
+                <li><a href="accessory.php#product__item">аксессуары</a></li>
+            </ul>
         </div>
-        <form action="#">
-            <div class="form__field">
-                <label for="name">имя</label>
-                <input type="text" name="name" id="name">
-            </div>
-            <div class="form__field">
-                <label for="email">почта</label>
-                <input type="email" name="email" id="email">
-            </div>
-            <div class="form__field">
-                <label for="msg">сообщение</label>
-                <textarea name="msg" id="msg" cols="30" rows="5"></textarea>
-            </div>
-            <button>связаться</button>
-        </form>
-    </div>
+        <?php
+        $link = mysqli_connect("localhost", "root", "", "kapture.");
+        $sql = "SELECT `Name`, `Type`, `Description`, `Price`, `Photo` FROM `products` WHERE `Type`='объектив' ORDER BY `ID` DESC";
+
+        if($result = $link->query($sql)){
+            $rowsCount = $result->num_rows;
+            foreach($result as $row){
+                echo '<div class="product__item">
+                <div class="product__item-img">
+                  <img src="../assets/images/products/' . $row["Photo"] . '" alt="" />
+                </div>
+                <div class="product__item-txt">
+                  <h4>' . $row["Name"] . '</h4>
+                  <p class="type">' . $row["Type"] . '</p>
+                  <p>' . $row["Description"] . '</p>
+                  <div class="product__item-group">
+                      <p class="price">' . $row["Price"] . 'р</p>
+                      <a href="" class="buy">купить →</a>
+                  </div>
+                </div>
+              </div>';}}
+        ?>
+        </div>
+      </div>
     </section>
     <footer>
       <a href="index.html" class="nav__logo"
         >kapture<span style="color: red">.</span></a
       >
-      <p>© 2022
-      <a href="https://www.github.com/sh4vk4">sh4vk4/g4vk4</a></p>
+      <p>© 2022 <a href="https://www.github.com/sh4vk4">sh4vk4/g4vk4</a></p>
     </footer>
   </body>
 </html>
