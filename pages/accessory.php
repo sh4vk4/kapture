@@ -43,7 +43,7 @@
         <h1>
           камеры.<br />
           объективы.<br />
-          аксессуары.
+          <span style="color: red">аксессуары.</span>
         </h1>
         <h2>каталог товаров</h2>
       </div>
@@ -63,36 +63,38 @@
       <div class="hero__particle4"></div>
       <div class="hero__particle5"></div>
       <div class="product__container container">
-          <h3 style="text-align: left;">аксессуары ↓</h3>
           <div class="product__catalogue">
+          <h3 style="text-align: left;">аксессуары ↓</h3>
             <ul>
+                <li><a href="products.php#product__item">новые товары</a></li> |
                 <li><a href="cameras.php#product__item">камеры</a></li> |
                 <li><a href="lens.php#product__item">объективы</a></li> |
-                <li><u>аксессуары</u></li>
+                <li><u>аксессуары</u></li> |
+                <li><a style="font-weight: 800;" href="add.php#product__item">+</a></li>
             </ul>
         </div>
         <?php
         $link = mysqli_connect("localhost", "root", "", "kapture.");
-        $sql = "SELECT `Name`, `Type`, `Description`, `Price`, `Photo` FROM `products` WHERE `Type`='аксессуар' ORDER BY `ID` DESC";
+        $sql = "SELECT `productName`, `productType`, `productDescription`, `productPrice`, `productPhoto` FROM `products` WHERE `productType`='аксессуар' ORDER BY `ID` DESC";
 
         if($result = $link->query($sql)){
-            $rowsCount = $result->num_rows;
-            foreach($result as $row){
-                echo '<div class="product__item">
-                <div class="product__item-img">
-                  <img src="../assets/images/products/' . $row["Photo"] . '" alt="" />
+          $rowsCount = $result->num_rows;
+          foreach($result as $row){
+              echo '<div class="product__item">
+              <div class="product__item-img">
+                <img src="upload/' . $row["productPhoto"] . '" alt="" />
+              </div>
+              <div class="product__item-txt">
+                <h4>' . $row["productName"] . '</h4>
+                <p class="type">' . $row["productType"] . '</p>
+                <p>' . $row["productDescription"] . '</p>
+                <div class="product__item-group">
+                    <p class="price">' . $row["productPrice"] . 'р</p>
+                    <p><a style="margin-right: 1rem; font-size:1.5rem; color: red;" href="#"><i class="bx bx-edit-alt"></i></a><a href="" class="buy">купить →</a></p>
                 </div>
-                <div class="product__item-txt">
-                  <h4>' . $row["Name"] . '</h4>
-                  <p class="type">' . $row["Type"] . '</p>
-                  <p>' . $row["Description"] . '</p>
-                  <div class="product__item-group">
-                      <p class="price">' . $row["Price"] . 'р</p>
-                      <a href="" class="buy">купить →</a>
-                  </div>
-                </div>
-              </div>';}}
-        ?>
+              </div>
+            </div>';}}
+      ?>
         </div>
       </div>
     </section>

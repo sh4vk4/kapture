@@ -395,6 +395,10 @@ h3{
     gap: 1.5rem;
 }
 
+.info__icons-item:hover .bx{
+    transform: translateY(-3px);
+}
+
 .info__icons-item{
     display: flex;
     align-items: center;
@@ -463,8 +467,7 @@ background-size: cover;
 h4{
         font-size: 2.5rem;
         font-weight: 800;
-        line-height: 2rem;
-        margin-bottom: 1rem;
+        line-height: 2.4rem;
 }
 
 .pic1, .pic2{
@@ -572,12 +575,34 @@ textarea:hover{
 
 input,
 textarea,
-button{
+button,
+select{
     color: rgb(0, 0, 0);
     font-family: 'Montserrat';
     border: none;
     background:rgb(235, 235, 235);
     padding: 1rem;
+}
+
+input[type=file]{
+    padding: 1rem 0;
+    background: none;
+}
+
+::-webkit-file-upload-button{
+    color: white;
+    background: black;
+    border: none;
+    padding: .75rem 1rem;
+    cursor: pointer;
+}
+
+::-webkit-file-upload-button:hover{
+    background: rgb(16, 16, 16);  
+}
+
+option{
+    background: white;
 }
 
 button{
@@ -603,12 +628,15 @@ button:hover{
     color: rgb(18, 18, 18);
 }
 
-.product h4{
-    margin-bottom: -5px;
+.product__catalogue ul{
+    gap: 0.5rem;
 }
 
-.product ul{
-    gap: 0.5rem;
+.product__catalogue{
+    display: flex;
+    flex-direction: column;
+    gap:1rem;
+    grid-column: span 2 / 3;
 }
 
 .product__container{
@@ -619,8 +647,8 @@ button:hover{
 
 .product__item{
     display: grid;
-    grid-template-columns: repeat(1,600px 1fr);
-    gap:3rem;
+    grid-template-columns: repeat(1,500px 1fr);
+    gap:2rem;
 }
 
 .product__item-txt{
@@ -668,11 +696,6 @@ button:hover{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-}
-
-.featured__item img{
-    display: flex;
-    justify-self: flex-start;
 }
 
 .featured__item:hover img{

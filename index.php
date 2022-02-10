@@ -25,7 +25,7 @@
   <body>
     <header>
       <nav class="container">
-        <a href="index.html" class="nav__logo"
+        <a href="index.php" class="nav__logo"
           >kapture<span style="color: red">.</span></a
         >
         <ul>
@@ -68,17 +68,17 @@
       <div class="featured__container container">
       <?php
         $link = mysqli_connect("localhost", "root", "", "kapture.");
-        $sql = "SELECT `Name`, `Description`, `Price`, `Photo` FROM `products` WHERE `Featured` = 1";
-
+        $sql = "SELECT `productName`, `productDescription`, `productPrice`, `productPhoto` FROM `products` WHERE `productPurchases` > 500 LIMIT 3";
         if($result = $link->query($sql)){
             $rowsCount = $result->num_rows;
-            foreach($result as $row){
+            foreach($result as $row)
+            {
                 echo '<div class="featured__item">
-                <img src="assets/images/products/' . $row["Photo"] . '" alt="" />
-              <h4>' . $row["Name"] . '</h4>
-              <p>' . $row["Description"] . '</p>
+                <img src="assets/images/products/' . $row["productPhoto"] . '" alt="" />
+              <h4>' . $row["productName"] . '</h4>
+              <p>' . $row["productDescription"] . '</p>
               <div class="product__item-group">
-                  <p class="price">' . $row["Price"] . 'р</p>
+                  <p class="price">' . $row["productPrice"] . 'р</p>
                 <a href="#" class="buy">купить →</a>
             </div>
             </div>';}}?>
