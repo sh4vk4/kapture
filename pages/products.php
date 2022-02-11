@@ -74,13 +74,13 @@
             </ul>
         </div>
         <?php
-        $link = mysqli_connect("localhost", "root", "", "kapture.");
-        $sql = "SELECT `productName`, `productType`, `productDescription`, `productPrice`, `productPhoto` FROM `products` ORDER BY `ID` DESC";
+        $db = mysqli_connect("localhost", "root", "", "kapture.");
+        $sql = "SELECT `ID`, `productName`, `productType`, `productDescription`, `productPrice`, `productPhoto` FROM `products` ORDER BY `ID` DESC";
 
-        if($result = $link->query($sql)){
+        if($result = $db->query($sql)){
             $rowsCount = $result->num_rows;
             foreach($result as $row){
-                echo '<div class="product__item">
+                echo '<div id="product__item" class="product__item">
                 <div class="product__item-img">
                   <img src="upload/' . $row["productPhoto"] . '" alt="" />
                 </div>
@@ -90,10 +90,24 @@
                   <p>' . $row["productDescription"] . '</p>
                   <div class="product__item-group">
                       <p class="price">' . $row["productPrice"] . 'р</p>
-                      <p><a style="margin-right: 1rem; font-size:1.5rem; color: red;" href="#"><i class="bx bx-edit-alt"></i></a><a href="" class="buy">купить →</a></p>
+                      <form class="form__delete" action="products.php#product__item" method="POST">
+                        <input type="hidden" name="ID" value="' . $row["ID"] . '">
+                        <button  class="button__delete" name="delete">
+                        <i class="bx bxs-trash"></i>
+                        </button>
+                        <a href="" class="buy">купить →</a>
+                      </form>
                   </div>
                 </div>
               </div>';}}
+
+              if (isset($_POST['delete']) && isset($_POST['ID']))
+                  {
+                    $sql2 = "DELETE FROM `products` WHERE `ID` = '{$_POST['ID']}'";
+                    
+                    $result2 = $db->query($sql2);
+                    if ($result2) echo "DELETE failed: $sql2 <br>" . $db->error . "<br><br>";
+                  }
         ?>
         </div>
       </div>

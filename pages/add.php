@@ -1,34 +1,3 @@
-<?php
-
-  $msg="";
-
-  // Create database connection
-  $db = mysqli_connect("localhost", "root", "", "kapture.")
-  or die("Не удалось подключиться к БД" . mysqli_error($db));
-
-  // If upload button is clicked ...
-  if (isset($_POST['upload'])) {
-
-    $photo = $_FILES['photo']['name'];
-    $target = "upload/".basename($photo);
-
-  	//Вставляем данные, подставляя их в запрос
-    $sql = mysqli_query($db, "INSERT INTO products (productName, productType, productDescription, productPrice, productPhoto) VALUES ('{$_POST['name']}', '{$_POST['type']}', '{$_POST['description']}', '{$_POST['price']}', '$photo')");
-    //Если вставка прошла успешно
-    if ($sql) {
-        echo '<p>Данные успешно добавлены в таблицу.</p>';
-    } else {
-        echo '<p>Произошла ошибка: ' . mysqli_error($db) . '</p>';
-    }
-
-    if (move_uploaded_file($_FILES['photo']['tmp_name'], $target)) {
-  		$msg = "Image uploaded successfully";
-  	}else{
-  		$msg = "Failed to upload image";
-  	}
-}
-?>
-
 <!DOCTYPE html>
 <html lang="ru">
   <head>
@@ -104,10 +73,38 @@
                 <li style="font-weight:800;"><u>+</u></li>
             </ul>
         </div>
-        <form action="#product__item" method="POST" enctype="multipart/form-data">
+        <form class="add" action="#product__item" method="POST" enctype="multipart/form-data">
+                <?php
+
+                      // Create database connection
+                      $db = mysqli_connect("localhost", "root", "", "kapture.")
+                      or die("Не удалось подключиться к БД" . mysqli_error($db));
+
+                      // If upload button is clicked ...
+                      if (isset($_POST['upload'])) {
+
+                        $photo = $_FILES['photo']['name'];
+                        $target = "upload/".basename($photo);
+
+                        //Вставляем данные, подставляя их в запрос
+                        $sql = mysqli_query($db, "INSERT INTO products (productName, productType, productDescription, productPrice, productPhoto) VALUES ('{$_POST['name']}', '{$_POST['type']}', '{$_POST['description']}', '{$_POST['price']}', '$photo')");
+                        //Если вставка прошла успешно
+                        if ($sql) {
+                            echo '<p>Данные успешно добавлены в таблицу.</p>';
+                        } else {
+                            echo '<p>Произошла ошибка: ' . mysqli_error($db) . '</p>';
+                        }
+
+                        if (move_uploaded_file($_FILES['photo']['tmp_name'], $target)) {
+                          $msg = "Image uploaded successfully";
+                        }else{
+                          $msg = "Failed to upload image";
+                        }
+                      }
+                ?>
             <div class="form__field">
             <label for="name">название товара</label>
-            <input type="text" name="name" id="name">
+            <input type="text" name="name" id="name" autocomplete="off" required>
             </div>
             <div class="form__field">
             <label for="type">тип товара</label>
@@ -120,7 +117,7 @@
             </div>
             <div class="form__field">
                 <label for="description">описание товара</label>
-                <textarea name="description" id="description" maxlength="255" cols="30" rows="5"></textarea>
+                <textarea name="description" id="description" maxlength="255" cols="30" rows="5" autocomplete="off" required></textarea>
             </div>
             <div class="form__field">
             <label for="price">цена товара (в рублях)</label>
@@ -128,7 +125,7 @@
             </div>
             <div class="form__field">
             <label for="photo">фото товара (рекомендуем 1200х900)</label>
-            <input type="hidden" name="size" value="350000">
+            <input type="hidden" name="size" value="350000" autocomplete="off" required>
             <input type="file" name="photo">
             </div>
             <button type="submit" name="upload">добавить товар</button>

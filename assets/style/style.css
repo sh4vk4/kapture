@@ -557,6 +557,11 @@ form{
     gap: 2rem;
 }
 
+.add{
+    margin: auto;
+    width: 70%;
+}
+
 .form__field{
     display: flex;
     flex-direction: column;
@@ -595,6 +600,7 @@ input[type=file]{
     border: none;
     padding: .75rem 1rem;
     cursor: pointer;
+    font-family: 'Montserrat';
 }
 
 ::-webkit-file-upload-button:hover{
@@ -683,7 +689,7 @@ button:hover{
 
 .featured__container{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 3rem;
 }
 
@@ -700,6 +706,24 @@ button:hover{
 
 .featured__item:hover img{
     transform: translateY(-5px);
+}
+
+.button__delete{
+    padding: 0;
+    background: none;
+    font-size: 1.2rem;
+    color: red;
+}
+
+.button__delete:hover{
+    color: rgb(193, 0, 0);
+    background: none;
+}
+
+.form__delete{
+    display: flex;
+    gap: 1rem;
+    flex-direction: row;
 }
 
 footer{

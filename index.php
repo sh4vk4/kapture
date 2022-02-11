@@ -74,7 +74,7 @@
             foreach($result as $row)
             {
                 echo '<div class="featured__item">
-                <img src="assets/images/products/' . $row["productPhoto"] . '" alt="" />
+                <img src="/pages/upload/' . $row["productPhoto"] . '" alt="" />
               <h4>' . $row["productName"] . '</h4>
               <p>' . $row["productDescription"] . '</p>
               <div class="product__item-group">
